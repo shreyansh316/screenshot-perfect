@@ -1,0 +1,11 @@
+# Growvia roadmap
+- [ ] Design system (navy/blue/teal, Plus Jakarta Sans)
+- [ ] Global nav (public + signed-in, mobile), footer
+- [ ] Homepage with working search
+- [ ] Internships list (search, filters, sort, pagination, save) + detail
+- [ ] Resume builder (8 steps, live preview, templates, reorder, PDF/print, autosave)
+- [ ] Auth (email + Google), return-to redirect
+- [ ] Dashboard, saved, applications, profile, settings
+- [ ] Jobs, freelancing (+ freelancer profile), roadmaps, resources, interview prep
+- [ ] About, contact, privacy, terms
+- [ ] Head metadata, tests, route/interaction checks
