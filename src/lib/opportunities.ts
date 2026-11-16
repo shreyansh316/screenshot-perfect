@@ -188,7 +188,7 @@ const jobRows: Row[] = [
   ["job-research-brightmere", "Research Associate", "brightmere", "London", "UK", "hybrid", "full-time", true, null, "Research", ["Mixed methods", "Analysis", "Writing"], "Run studies that shape clinic-facing products.", 14],
 ];
 
-const freelanceRows: (Row & { 13?: never })[] = [
+const freelanceRows: Row[] = [
   ["fl-landing-page", "Landing page for a solar monitoring app", "tidecrest", "Remote", "India", "remote", "part-time", true, null, "Design", ["Figma", "Web design", "Copy layout"], "Design a single responsive landing page explaining the product to housing societies.", 2],
   ["fl-newsletter-template", "Email newsletter template build", "quillstone", "Remote", "Canada", "remote", "part-time", true, null, "Software Engineering", ["HTML email", "MJML", "Testing"], "Code a reusable, accessible newsletter template that renders well across email clients.", 3],
   ["fl-data-cleanup", "Survey data clean-up and summary", "halvane", "Remote", "USA", "remote", "part-time", true, null, "Data & Analytics", ["Excel", "Python", "Data cleaning"], "Clean a 4,000-row programme survey and produce a short summary of key results.", 5],
