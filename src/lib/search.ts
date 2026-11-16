@@ -3,16 +3,16 @@ import {
 } from "./opportunities";
 
 export interface OpportunitySearch {
-  q?: string;
-  location?: string;
-  type?: OpportunityType;
-  arrangement?: Arrangement[];
-  paid?: PaidFilter;
-  schedule?: Schedule[];
-  duration?: DurationBucket[];
-  category?: Category[];
-  sort?: SortKey;
-  page?: number;
+  q?: string | undefined;
+  location?: string | undefined;
+  type?: OpportunityType | undefined;
+  arrangement?: Arrangement[] | undefined;
+  paid?: PaidFilter | undefined;
+  schedule?: Schedule[] | undefined;
+  duration?: DurationBucket[] | undefined;
+  category?: Category[] | undefined;
+  sort?: SortKey | undefined;
+  page?: number | undefined;
 }
 
 function str(v: unknown): string | undefined {
