@@ -12,8 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ExploreRouteImport } from './routes/explore'
 import { Route as FreelancingIndexRouteImport } from './routes/freelancing.index'
+import { Route as FreelancingIdRouteImport } from './routes/freelancing.$id'
 import { Route as InternshipsIndexRouteImport } from './routes/internships.index'
+import { Route as InternshipsIdRouteImport } from './routes/internships.$id'
 import { Route as JobsIndexRouteImport } from './routes/jobs.index'
+import { Route as JobsIdRouteImport } from './routes/jobs.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -30,9 +33,19 @@ const FreelancingIndexRoute = FreelancingIndexRouteImport.update({
   path: '/freelancing/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FreelancingIdRoute = FreelancingIdRouteImport.update({
+  id: '/freelancing/$id',
+  path: '/freelancing/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const InternshipsIndexRoute = InternshipsIndexRouteImport.update({
   id: '/internships/',
   path: '/internships/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InternshipsIdRoute = InternshipsIdRouteImport.update({
+  id: '/internships/$id',
+  path: '/internships/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JobsIndexRoute = JobsIndexRouteImport.update({
@@ -40,10 +53,18 @@ const JobsIndexRoute = JobsIndexRouteImport.update({
   path: '/jobs/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const JobsIdRoute = JobsIdRouteImport.update({
+  id: '/jobs/$id',
+  path: '/jobs/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
+  '/freelancing/$id': typeof FreelancingIdRoute
+  '/internships/$id': typeof InternshipsIdRoute
+  '/jobs/$id': typeof JobsIdRoute
   '/freelancing/': typeof FreelancingIndexRoute
   '/internships/': typeof InternshipsIndexRoute
   '/jobs/': typeof JobsIndexRoute
@@ -51,6 +72,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
+  '/freelancing/$id': typeof FreelancingIdRoute
+  '/internships/$id': typeof InternshipsIdRoute
+  '/jobs/$id': typeof JobsIdRoute
   '/freelancing': typeof FreelancingIndexRoute
   '/internships': typeof InternshipsIndexRoute
   '/jobs': typeof JobsIndexRoute
@@ -59,22 +83,52 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/explore': typeof ExploreRoute
+  '/freelancing/$id': typeof FreelancingIdRoute
+  '/internships/$id': typeof InternshipsIdRoute
+  '/jobs/$id': typeof JobsIdRoute
   '/freelancing/': typeof FreelancingIndexRoute
   '/internships/': typeof InternshipsIndexRoute
   '/jobs/': typeof JobsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/explore' | '/freelancing/' | '/internships/' | '/jobs/'
+  fullPaths:
+    | '/'
+    | '/explore'
+    | '/freelancing/$id'
+    | '/internships/$id'
+    | '/jobs/$id'
+    | '/freelancing/'
+    | '/internships/'
+    | '/jobs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/explore' | '/freelancing' | '/internships' | '/jobs'
+  to:
+    | '/'
+    | '/explore'
+    | '/freelancing/$id'
+    | '/internships/$id'
+    | '/jobs/$id'
+    | '/freelancing'
+    | '/internships'
+    | '/jobs'
   id:
-    '__root__' | '/' | '/explore' | '/freelancing/' | '/internships/' | '/jobs/'
+    | '__root__'
+    | '/'
+    | '/explore'
+    | '/freelancing/$id'
+    | '/internships/$id'
+    | '/jobs/$id'
+    | '/freelancing/'
+    | '/internships/'
+    | '/jobs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ExploreRoute: typeof ExploreRoute
+  FreelancingIdRoute: typeof FreelancingIdRoute
+  InternshipsIdRoute: typeof InternshipsIdRoute
+  JobsIdRoute: typeof JobsIdRoute
   FreelancingIndexRoute: typeof FreelancingIndexRoute
   InternshipsIndexRoute: typeof InternshipsIndexRoute
   JobsIndexRoute: typeof JobsIndexRoute
@@ -103,11 +157,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FreelancingIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/freelancing/$id': {
+      id: '/freelancing/$id'
+      path: '/freelancing/$id'
+      fullPath: '/freelancing/$id'
+      preLoaderRoute: typeof FreelancingIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/internships/': {
       id: '/internships/'
       path: '/internships'
       fullPath: '/internships/'
       preLoaderRoute: typeof InternshipsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/internships/$id': {
+      id: '/internships/$id'
+      path: '/internships/$id'
+      fullPath: '/internships/$id'
+      preLoaderRoute: typeof InternshipsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/jobs/': {
@@ -117,12 +185,22 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JobsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/jobs/$id': {
+      id: '/jobs/$id'
+      path: '/jobs/$id'
+      fullPath: '/jobs/$id'
+      preLoaderRoute: typeof JobsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ExploreRoute: ExploreRoute,
+  FreelancingIdRoute: FreelancingIdRoute,
+  InternshipsIdRoute: InternshipsIdRoute,
+  JobsIdRoute: JobsIdRoute,
   FreelancingIndexRoute: FreelancingIndexRoute,
   InternshipsIndexRoute: InternshipsIndexRoute,
   JobsIndexRoute: JobsIndexRoute,
