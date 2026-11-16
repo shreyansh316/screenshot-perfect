@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link, useLocation, type LinkProps } from "@tanstack/react-router";
 import {
   Bookmark, Briefcase, ChevronDown, FileText, GraduationCap, LayoutDashboard, LogOut, Menu, Settings, User, X, Compass, Laptop, ClipboardList, Map, BookOpen,
 } from "lucide-react";
@@ -11,7 +11,7 @@ import { Logo } from "./Logo";
 import { displayName, useAuth, useSignOut } from "@/lib/auth";
 import { cn } from "@/lib/utils";
 
-type NavItem = { to: string; label: string; icon: typeof Compass };
+type NavItem = { to: NonNullable<LinkProps["to"]>; label: string; icon: typeof Compass };
 
 const publicNav: NavItem[] = [
   { to: "/explore", label: "Explore", icon: Compass },

@@ -1,7 +1,7 @@
-import { Link } from "@tanstack/react-router";
+import { Link, type LinkProps } from "@tanstack/react-router";
 import { Logo } from "./Logo";
 
-const cols: { title: string; links: { to: string; label: string }[] }[] = [
+const cols: { title: string; links: { to: NonNullable<LinkProps["to"]>; label: string }[] }[] = [
   { title: "Opportunities", links: [
     { to: "/explore", label: "Explore all" }, { to: "/internships", label: "Internships" }, { to: "/jobs", label: "Jobs" }, { to: "/freelancing", label: "Freelance projects" },
   ] },
