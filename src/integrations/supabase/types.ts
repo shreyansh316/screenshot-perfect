@@ -14,7 +14,183 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      applications: {
+        Row: {
+          cover_note: string | null
+          created_at: string
+          id: string
+          note: string | null
+          opportunity_id: string
+          opportunity_type: string
+          status: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          cover_note?: string | null
+          created_at?: string
+          id?: string
+          note?: string | null
+          opportunity_id: string
+          opportunity_type: string
+          status?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          cover_note?: string | null
+          created_at?: string
+          id?: string
+          note?: string | null
+          opportunity_id?: string
+          opportunity_type?: string
+          status?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          topic: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          topic?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          topic?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          availability: string
+          bio: string | null
+          created_at: string
+          email_updates: boolean
+          experience_summary: string | null
+          freelancer_intro: string | null
+          full_name: string | null
+          github_url: string | null
+          headline: string | null
+          id: string
+          interests: string[]
+          linkedin_url: string | null
+          location: string | null
+          portfolio_projects: Json
+          portfolio_url: string | null
+          skills: string[]
+          updated_at: string
+        }
+        Insert: {
+          availability?: string
+          bio?: string | null
+          created_at?: string
+          email_updates?: boolean
+          experience_summary?: string | null
+          freelancer_intro?: string | null
+          full_name?: string | null
+          github_url?: string | null
+          headline?: string | null
+          id: string
+          interests?: string[]
+          linkedin_url?: string | null
+          location?: string | null
+          portfolio_projects?: Json
+          portfolio_url?: string | null
+          skills?: string[]
+          updated_at?: string
+        }
+        Update: {
+          availability?: string
+          bio?: string | null
+          created_at?: string
+          email_updates?: boolean
+          experience_summary?: string | null
+          freelancer_intro?: string | null
+          full_name?: string | null
+          github_url?: string | null
+          headline?: string | null
+          id?: string
+          interests?: string[]
+          linkedin_url?: string | null
+          location?: string | null
+          portfolio_projects?: Json
+          portfolio_url?: string | null
+          skills?: string[]
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      resumes: {
+        Row: {
+          created_at: string
+          data: Json
+          id: string
+          template: string
+          title: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          id?: string
+          template?: string
+          title?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          id?: string
+          template?: string
+          title?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      saved_opportunities: {
+        Row: {
+          created_at: string
+          id: string
+          opportunity_id: string
+          opportunity_type: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          opportunity_id: string
+          opportunity_type: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          opportunity_id?: string
+          opportunity_type?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
