@@ -38,7 +38,7 @@ export function SaveButton({ o, variant = "icon", className }: { o: Opportunity;
 export function OpportunityCard({ o, className }: { o: Opportunity; className?: string }) {
   const duration = durationLabel(o.durationMonths);
   return (
-    <article className={cn("surface-card card-hover group flex flex-col p-5", className)}>
+    <article className={cn("surface-card card-hover group relative flex flex-col p-5", className)}>
       <div className="flex items-start gap-3.5">
         <CompanyMark name={o.company.name} />
         <div className="min-w-0 flex-1">
@@ -76,7 +76,8 @@ export function OpportunityCard({ o, className }: { o: Opportunity; className?: 
         ))}
       </ul>
 
-      <div className="mt-auto flex items-center justify-between gap-3 border-t pt-3.5 text-xs text-muted-foreground [margin-top:max(1rem,auto)]">
+      <div className="min-h-4 flex-1" />
+      <div className="flex items-center justify-between gap-3 border-t pt-3.5 text-xs text-muted-foreground">
         <span>{postedLabel(o.postedDaysAgo)}</span>
         <div className="flex items-center gap-3">
           <DemoBadge />
