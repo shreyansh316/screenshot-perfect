@@ -43,7 +43,7 @@ function AuthPage() {
   useEffect(() => {
     if (loading || !user) return;
     const dest = takePostAuthRedirect() ?? safeRedirect(search.redirect);
-    navigate({ to: dest, replace: true });
+    navigate({ href: dest, replace: true });
   }, [user, loading, navigate, search.redirect]);
 
   const submit = async (e: FormEvent) => {
@@ -94,7 +94,6 @@ function AuthPage() {
   return (
     <div className="grid min-h-[calc(100vh-4rem)] lg:grid-cols-2">
       <div className="hidden flex-col justify-between bg-navy p-12 text-navy-foreground lg:flex">
-        <div className="grid-lines absolute" aria-hidden="true" />
         <p className="eyebrow">From Potential to Opportunity</p>
         <div>
           <h2 className="max-w-md text-3xl font-semibold leading-tight">One account for your search, your resume and every application.</h2>
