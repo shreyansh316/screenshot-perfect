@@ -10,23 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExploreRouteImport } from './routes/explore'
+import { Route as InterviewPrepRouteImport } from './routes/interview-prep'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
+import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as RoadmapsRouteImport } from './routes/roadmaps'
+import { Route as TermsRouteImport } from './routes/terms'
+import { Route as AuthenticatedApplicationsRouteImport } from './routes/_authenticated/applications'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedSavedRouteImport } from './routes/_authenticated/saved'
+import { Route as AuthenticatedSettingsRouteImport } from './routes/_authenticated/settings'
 import { Route as FreelancingIndexRouteImport } from './routes/freelancing.index'
 import { Route as FreelancingIdRouteImport } from './routes/freelancing.$id'
 import { Route as InternshipsIndexRouteImport } from './routes/internships.index'
 import { Route as InternshipsIdRouteImport } from './routes/internships.$id'
 import { Route as JobsIndexRouteImport } from './routes/jobs.index'
 import { Route as JobsIdRouteImport } from './routes/jobs.$id'
+import { Route as ResumeBuilderIndexRouteImport } from './routes/resume-builder.index'
+import { Route as ResumeBuilderBuildRouteImport } from './routes/resume-builder.build'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ExploreRoute = ExploreRouteImport.update({
   id: '/explore',
   path: '/explore',
   getParentRoute: () => rootRouteImport,
+} as any)
+const InterviewPrepRoute = InterviewPrepRouteImport.update({
+  id: '/interview-prep',
+  path: '/interview-prep',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RoadmapsRoute = RoadmapsRouteImport.update({
+  id: '/roadmaps',
+  path: '/roadmaps',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TermsRoute = TermsRouteImport.update({
+  id: '/terms',
+  path: '/terms',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedApplicationsRoute =
+  AuthenticatedApplicationsRouteImport.update({
+    id: '/applications',
+    path: '/applications',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSavedRoute = AuthenticatedSavedRouteImport.update({
+  id: '/saved',
+  path: '/saved',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedSettingsRoute = AuthenticatedSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const FreelancingIndexRoute = FreelancingIndexRouteImport.update({
   id: '/freelancing/',
@@ -58,80 +150,200 @@ const JobsIdRoute = JobsIdRouteImport.update({
   path: '/jobs/$id',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResumeBuilderIndexRoute = ResumeBuilderIndexRouteImport.update({
+  id: '/resume-builder/',
+  path: '/resume-builder/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResumeBuilderBuildRoute = ResumeBuilderBuildRouteImport.update({
+  id: '/resume-builder/build',
+  path: '/resume-builder/build',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/interview-prep': typeof InterviewPrepRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/resources': typeof ResourcesRoute
+  '/roadmaps': typeof RoadmapsRoute
+  '/terms': typeof TermsRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/saved': typeof AuthenticatedSavedRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/freelancing/$id': typeof FreelancingIdRoute
   '/internships/$id': typeof InternshipsIdRoute
   '/jobs/$id': typeof JobsIdRoute
+  '/resume-builder/build': typeof ResumeBuilderBuildRoute
   '/freelancing/': typeof FreelancingIndexRoute
   '/internships/': typeof InternshipsIndexRoute
   '/jobs/': typeof JobsIndexRoute
+  '/resume-builder/': typeof ResumeBuilderIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/interview-prep': typeof InterviewPrepRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/resources': typeof ResourcesRoute
+  '/roadmaps': typeof RoadmapsRoute
+  '/terms': typeof TermsRoute
+  '/applications': typeof AuthenticatedApplicationsRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/saved': typeof AuthenticatedSavedRoute
+  '/settings': typeof AuthenticatedSettingsRoute
   '/freelancing/$id': typeof FreelancingIdRoute
   '/internships/$id': typeof InternshipsIdRoute
   '/jobs/$id': typeof JobsIdRoute
+  '/resume-builder/build': typeof ResumeBuilderBuildRoute
   '/freelancing': typeof FreelancingIndexRoute
   '/internships': typeof InternshipsIndexRoute
   '/jobs': typeof JobsIndexRoute
+  '/resume-builder': typeof ResumeBuilderIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/about': typeof AboutRoute
+  '/auth': typeof AuthRoute
+  '/contact': typeof ContactRoute
   '/explore': typeof ExploreRoute
+  '/interview-prep': typeof InterviewPrepRoute
+  '/privacy': typeof PrivacyRoute
+  '/reset-password': typeof ResetPasswordRoute
+  '/resources': typeof ResourcesRoute
+  '/roadmaps': typeof RoadmapsRoute
+  '/terms': typeof TermsRoute
+  '/_authenticated/applications': typeof AuthenticatedApplicationsRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/saved': typeof AuthenticatedSavedRoute
+  '/_authenticated/settings': typeof AuthenticatedSettingsRoute
   '/freelancing/$id': typeof FreelancingIdRoute
   '/internships/$id': typeof InternshipsIdRoute
   '/jobs/$id': typeof JobsIdRoute
+  '/resume-builder/build': typeof ResumeBuilderBuildRoute
   '/freelancing/': typeof FreelancingIndexRoute
   '/internships/': typeof InternshipsIndexRoute
   '/jobs/': typeof JobsIndexRoute
+  '/resume-builder/': typeof ResumeBuilderIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
+    | '/auth'
+    | '/contact'
     | '/explore'
+    | '/interview-prep'
+    | '/privacy'
+    | '/reset-password'
+    | '/resources'
+    | '/roadmaps'
+    | '/terms'
+    | '/applications'
+    | '/dashboard'
+    | '/profile'
+    | '/saved'
+    | '/settings'
     | '/freelancing/$id'
     | '/internships/$id'
     | '/jobs/$id'
+    | '/resume-builder/build'
     | '/freelancing/'
     | '/internships/'
     | '/jobs/'
+    | '/resume-builder/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
+    | '/auth'
+    | '/contact'
     | '/explore'
+    | '/interview-prep'
+    | '/privacy'
+    | '/reset-password'
+    | '/resources'
+    | '/roadmaps'
+    | '/terms'
+    | '/applications'
+    | '/dashboard'
+    | '/profile'
+    | '/saved'
+    | '/settings'
     | '/freelancing/$id'
     | '/internships/$id'
     | '/jobs/$id'
+    | '/resume-builder/build'
     | '/freelancing'
     | '/internships'
     | '/jobs'
+    | '/resume-builder'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/about'
+    | '/auth'
+    | '/contact'
     | '/explore'
+    | '/interview-prep'
+    | '/privacy'
+    | '/reset-password'
+    | '/resources'
+    | '/roadmaps'
+    | '/terms'
+    | '/_authenticated/applications'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/profile'
+    | '/_authenticated/saved'
+    | '/_authenticated/settings'
     | '/freelancing/$id'
     | '/internships/$id'
     | '/jobs/$id'
+    | '/resume-builder/build'
     | '/freelancing/'
     | '/internships/'
     | '/jobs/'
+    | '/resume-builder/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  AuthRoute: typeof AuthRoute
+  ContactRoute: typeof ContactRoute
   ExploreRoute: typeof ExploreRoute
+  InterviewPrepRoute: typeof InterviewPrepRoute
+  PrivacyRoute: typeof PrivacyRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
+  ResourcesRoute: typeof ResourcesRoute
+  RoadmapsRoute: typeof RoadmapsRoute
+  TermsRoute: typeof TermsRoute
   FreelancingIdRoute: typeof FreelancingIdRoute
   InternshipsIdRoute: typeof InternshipsIdRoute
   JobsIdRoute: typeof JobsIdRoute
+  ResumeBuilderBuildRoute: typeof ResumeBuilderBuildRoute
   FreelancingIndexRoute: typeof FreelancingIndexRoute
   InternshipsIndexRoute: typeof InternshipsIndexRoute
   JobsIndexRoute: typeof JobsIndexRoute
+  ResumeBuilderIndexRoute: typeof ResumeBuilderIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -143,12 +355,117 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/explore': {
       id: '/explore'
       path: '/explore'
       fullPath: '/explore'
       preLoaderRoute: typeof ExploreRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/interview-prep': {
+      id: '/interview-prep'
+      path: '/interview-prep'
+      fullPath: '/interview-prep'
+      preLoaderRoute: typeof InterviewPrepRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/roadmaps': {
+      id: '/roadmaps'
+      path: '/roadmaps'
+      fullPath: '/roadmaps'
+      preLoaderRoute: typeof RoadmapsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terms': {
+      id: '/terms'
+      path: '/terms'
+      fullPath: '/terms'
+      preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/applications': {
+      id: '/_authenticated/applications'
+      path: '/applications'
+      fullPath: '/applications'
+      preLoaderRoute: typeof AuthenticatedApplicationsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/saved': {
+      id: '/_authenticated/saved'
+      path: '/saved'
+      fullPath: '/saved'
+      preLoaderRoute: typeof AuthenticatedSavedRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/settings': {
+      id: '/_authenticated/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AuthenticatedSettingsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
     '/freelancing/': {
       id: '/freelancing/'
@@ -192,18 +509,63 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof JobsIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resume-builder/': {
+      id: '/resume-builder/'
+      path: '/resume-builder'
+      fullPath: '/resume-builder/'
+      preLoaderRoute: typeof ResumeBuilderIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resume-builder/build': {
+      id: '/resume-builder/build'
+      path: '/resume-builder/build'
+      fullPath: '/resume-builder/build'
+      preLoaderRoute: typeof ResumeBuilderBuildRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedApplicationsRoute: typeof AuthenticatedApplicationsRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedSavedRoute: typeof AuthenticatedSavedRoute
+  AuthenticatedSettingsRoute: typeof AuthenticatedSettingsRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedApplicationsRoute: AuthenticatedApplicationsRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedSavedRoute: AuthenticatedSavedRoute,
+  AuthenticatedSettingsRoute: AuthenticatedSettingsRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AboutRoute: AboutRoute,
+  AuthRoute: AuthRoute,
+  ContactRoute: ContactRoute,
   ExploreRoute: ExploreRoute,
+  InterviewPrepRoute: InterviewPrepRoute,
+  PrivacyRoute: PrivacyRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
+  ResourcesRoute: ResourcesRoute,
+  RoadmapsRoute: RoadmapsRoute,
+  TermsRoute: TermsRoute,
   FreelancingIdRoute: FreelancingIdRoute,
   InternshipsIdRoute: InternshipsIdRoute,
   JobsIdRoute: JobsIdRoute,
+  ResumeBuilderBuildRoute: ResumeBuilderBuildRoute,
   FreelancingIndexRoute: FreelancingIndexRoute,
   InternshipsIndexRoute: InternshipsIndexRoute,
   JobsIndexRoute: JobsIndexRoute,
+  ResumeBuilderIndexRoute: ResumeBuilderIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
