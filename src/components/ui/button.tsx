@@ -21,6 +21,7 @@ const buttonVariants = cva(
         "outline-light":
           "border border-navy-foreground/25 bg-transparent text-navy-foreground hover:bg-navy-foreground/10",
         subtle: "bg-blue-soft text-primary hover:bg-accent",
+        google: "border border-google-border bg-google text-google-foreground hover:bg-muted",
       },
       size: {
         default: "h-9 px-4 py-2",

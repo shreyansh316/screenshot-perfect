@@ -51,6 +51,9 @@
   --color-warning: var(--warning);
   --color-warning-soft: var(--warning-soft);
   --color-surface: var(--surface);
+  --color-google: var(--google);
+  --color-google-border: var(--google-border);
+  --color-google-foreground: var(--google-foreground);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
   --color-chart-3: var(--chart-3);
@@ -101,6 +104,9 @@
   --blue-soft: oklch(0.955 0.025 262);
   --warning: oklch(0.62 0.14 65);
   --warning-soft: oklch(0.965 0.035 80);
+  --google: oklch(1 0 0); /* #FFFFFF */
+  --google-border: oklch(0.556 0.004 145); /* #747775 */
+  --google-foreground: oklch(0.235 0 0); /* #1F1F1F */
 
   --shadow-card: 0 1px 2px color-mix(in oklab, var(--navy) 6%, transparent);
   --shadow-lift: 0 1px 2px color-mix(in oklab, var(--navy) 6%, transparent),
