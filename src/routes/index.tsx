@@ -280,22 +280,22 @@ function Home() {
         <Reveal>
           <SectionHeading eyebrow="How Growvia works" title="Three steps, no guesswork" />
         </Reveal>
-        <ol className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
+        <div className="mt-10 grid gap-10 md:grid-cols-3 md:gap-8">
           {[
             { icon: Compass, t: "Discover", d: "Search internships, jobs and projects. Filter by arrangement, pay, schedule and duration until the list fits your life." },
             { icon: FileText, t: "Prepare", d: "Build a focused resume, follow a roadmap for the skills you're missing, and practise common interview questions." },
             { icon: BadgeCheck, t: "Apply & track", d: "Save what interests you, apply through Growvia, and keep every application and status in one place." },
           ].map((s, i) => (
             <Reveal key={s.t} delay={i * 80}>
-              <li className="relative list-none border-t-2 border-navy pt-6">
+              <div className="relative border-t-2 border-navy pt-6">
                 <span className="absolute -top-3 left-0 bg-background pr-3 text-xs font-semibold text-muted-foreground">0{i + 1}</span>
                 <s.icon className="size-5 text-teal" aria-hidden="true" />
                 <h3 className="mt-3 text-lg font-semibold text-navy">{s.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{s.d}</p>
-              </li>
+              </div>
             </Reveal>
           ))}
-        </ol>
+        </div>
       </section>
 
       {/* Trust */}
