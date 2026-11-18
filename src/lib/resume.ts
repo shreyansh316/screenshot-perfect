@@ -1,4 +1,4 @@
-export type SectionKey = "summary" | "experience" | "education" | "projects" | "skills" | "certifications";
+export type SectionKey = "summary" | "experience" | "education" | "projects" | "skills" | "certifications" | "languages" | "additional";
 export type TemplateKey = "classic" | "modern" | "compact";
 
 export interface Personal {
@@ -16,6 +16,7 @@ export interface Education { id: string; institution: string; degree: string; fi
 export interface Experience { id: string; kind: "work" | "internship" | "volunteer"; title: string; company: string; start: string; end: string; current: boolean; responsibilities: string; achievements: string }
 export interface Project { id: string; name: string; description: string; technologies: string; url: string }
 export interface Certification { id: string; name: string; issuer: string; date: string; link: string }
+export interface Language { id: string; name: string; level: string }
 
 export interface ResumeData {
   personal: Personal;
@@ -25,6 +26,9 @@ export interface ResumeData {
   projects: Project[];
   skills: { technical: string[]; professional: string[] };
   certifications: Certification[];
+  languages: Language[];
+  /** Free text: interests, availability, publications, anything else the user wants to add. */
+  additional: string;
   sectionOrder: SectionKey[];
 }
 
@@ -35,9 +39,13 @@ export const SECTION_LABELS: Record<SectionKey, string> = {
   projects: "Projects",
   skills: "Skills",
   certifications: "Certifications & achievements",
+  languages: "Languages",
+  additional: "Additional information",
 };
 
-export const DEFAULT_ORDER: SectionKey[] = ["summary", "education", "experience", "projects", "skills", "certifications"];
+export const LANGUAGE_LEVELS = ["Native", "Fluent", "Professional", "Conversational", "Basic"] as const;
+
+export const DEFAULT_ORDER: SectionKey[] = ["summary", "education", "experience", "projects", "skills", "certifications", "languages", "additional"];
 
 export const TEMPLATES: { key: TemplateKey; name: string; note: string }[] = [
   { key: "classic", name: "Classic", note: "Serif-free, centred header, works for any field" },
@@ -58,6 +66,8 @@ export function emptyResume(): ResumeData {
     projects: [],
     skills: { technical: [], professional: [] },
     certifications: [],
+    languages: [],
+    additional: "",
     sectionOrder: [...DEFAULT_ORDER],
   };
 }
@@ -66,6 +76,7 @@ export const emptyEducation = (): Education => ({ id: uid(), institution: "", de
 export const emptyExperience = (): Experience => ({ id: uid(), kind: "work", title: "", company: "", start: "", end: "", current: false, responsibilities: "", achievements: "" });
 export const emptyProject = (): Project => ({ id: uid(), name: "", description: "", technologies: "", url: "" });
 export const emptyCertification = (): Certification => ({ id: uid(), name: "", issuer: "", date: "", link: "" });
+export const emptyLanguage = (): Language => ({ id: uid(), name: "", level: "" });
 
 /** Merge unknown stored JSON into a valid ResumeData (tolerates older/partial drafts). */
 export function normalizeResume(raw: unknown): ResumeData {
@@ -87,6 +98,8 @@ export function normalizeResume(raw: unknown): ResumeData {
       professional: Array.isArray(r.skills?.professional) ? r.skills.professional : [],
     },
     certifications: Array.isArray(r.certifications) ? r.certifications.map((e) => ({ ...emptyCertification(), ...e })) : [],
+    languages: Array.isArray(r.languages) ? r.languages.map((e) => ({ ...emptyLanguage(), ...e })) : [],
+    additional: typeof r.additional === "string" ? r.additional : "",
     sectionOrder: order,
   };
 }
@@ -151,7 +164,35 @@ export function validateResume(r: ResumeData): Errors {
     if (!c.name.trim()) e[`certifications.${i}.name`] = "Add the certification name.";
     if (!isValidUrl(c.link)) e[`certifications.${i}.link`] = "Enter a valid web address.";
   });
+  r.languages.forEach((l, i) => {
+    if (!l.name.trim()) e[`languages.${i}.name`] = "Add the language name.";
+  });
   return e;
+}
+
+/** The eight builder steps, in order. */
+export const STEPS = [
+  { key: "personal", title: "Personal information" },
+  { key: "summary", title: "Professional summary" },
+  { key: "education", title: "Education" },
+  { key: "experience", title: "Work experience" },
+  { key: "projects", title: "Projects" },
+  { key: "skills", title: "Skills" },
+  { key: "certifications", title: "Certifications & achievements" },
+  { key: "additional", title: "Languages, links & more" },
+] as const;
+export type StepKey = (typeof STEPS)[number]["key"];
+
+/** Which step an error key belongs to. */
+export function stepForError(key: string): StepKey {
+  if (["portfolio", "linkedin", "github"].includes(key) || key.startsWith("languages.")) return "additional";
+  const head = key.split(".")[0]!;
+  if (head === "education" || head === "experience" || head === "projects" || head === "certifications") return head;
+  return "personal";
+}
+
+export function errorsForStep(all: Errors, step: StepKey): Errors {
+  return Object.fromEntries(Object.entries(all).filter(([k]) => stepForError(k) === step));
 }
 
 /** Percentage of core resume parts completed (0–100). Experience is optional for students: projects count instead. */
@@ -203,21 +244,4 @@ export function moveSection(order: SectionKey[], key: SectionKey, dir: -1 | 1): 
   const next = [...order];
   [next[i], next[j]] = [next[j]!, next[i]!];
   return next;
-}
-
-/** A filled-in example for students without work experience. */
-export function studentExample(): ResumeData {
-  return {
-    personal: { fullName: "Aanya Rao", headline: "Computer Science student · Frontend developer", email: "aanya.rao@example.com", phone: "+91 98765 43210", city: "Pune", country: "India", portfolio: "aanyarao.dev", linkedin: "linkedin.com/in/example", github: "github.com/example" },
-    summary: "Third-year computer science student who builds accessible web interfaces. Led a four-person team to ship a campus events app used by 600+ students, and enjoys turning messy requirements into simple, tested features.",
-    education: [{ id: uid(), institution: "Example Institute of Technology", degree: "B.Tech", field: "Computer Science", start: "2023-08", end: "2027-05", description: "Relevant coursework: Data Structures, Databases, Human–Computer Interaction. CGPA 8.6/10." }],
-    experience: [{ id: uid(), kind: "volunteer", title: "Web Volunteer", company: "Campus Coding Club", start: "2024-07", end: "", current: true, responsibilities: "Maintain the club website and event registration form\nRun monthly beginner workshops on HTML and CSS", achievements: "Cut registration drop-off by redesigning the sign-up form" }],
-    projects: [
-      { id: uid(), name: "Campus Events App", description: "Responsive web app for discovering and RSVPing to college events; 600+ active users in the first semester.", technologies: "React, TypeScript, Firebase", url: "github.com/example/events" },
-      { id: uid(), name: "Library Seat Finder", description: "Hackathon project showing live seat availability using a simple sensor feed.", technologies: "Python, Flask, Chart.js", url: "" },
-    ],
-    skills: { technical: ["React", "TypeScript", "HTML & CSS", "Git", "SQL"], professional: ["Team leadership", "Technical writing", "Public speaking"] },
-    certifications: [{ id: uid(), name: "Responsive Web Design", issuer: "Online course provider", date: "2024-03", link: "" }],
-    sectionOrder: ["summary", "education", "projects", "experience", "skills", "certifications"],
-  };
 }

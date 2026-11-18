@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { Bookmark, BookmarkCheck, Clock, MapPin, Wallet, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { CompanyMark, DemoBadge } from "./common";
+import { CompanyMark } from "./common";
 import { useToggleSave } from "@/hooks/use-account";
 import {
   arrangementLabel, budgetLabel, detailPath, durationLabel, locationLabel, paidLabel, postedLabel, scheduleLabel, type Opportunity,
@@ -80,7 +80,6 @@ export function OpportunityCard({ o, className }: { o: Opportunity; className?: 
       <div className="flex items-center justify-between gap-3 border-t pt-3.5 text-xs text-muted-foreground">
         <span>{postedLabel(o.postedDaysAgo)}</span>
         <div className="flex items-center gap-3">
-          <DemoBadge />
           <span className="relative z-10 text-sm font-medium text-primary transition-transform group-hover:translate-x-0.5" aria-hidden="true">View details →</span>
         </div>
       </div>

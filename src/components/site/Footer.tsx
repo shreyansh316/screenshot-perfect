@@ -41,7 +41,7 @@ export function Footer() {
       <div className="border-t border-navy-foreground/10">
         <div className="container-page flex flex-col gap-2 py-6 text-xs text-navy-foreground/60 md:flex-row md:items-center md:justify-between">
           <p>© {new Date().getFullYear()} Growvia. All rights reserved.</p>
-          <p>Listings marked “Demo listing” are sample content from fictional organisations.</p>
+          <p>Growvia only publishes listings it can verify. Never pay a fee to apply.</p>
         </div>
       </div>
     </footer>

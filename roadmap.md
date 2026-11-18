@@ -1,11 +1,10 @@
 # Growvia roadmap
-- [ ] Design system (navy/blue/teal, Plus Jakarta Sans)
-- [ ] Global nav (public + signed-in, mobile), footer
-- [ ] Homepage with working search
-- [ ] Internships list (search, filters, sort, pagination, save) + detail
-- [ ] Resume builder (8 steps, live preview, templates, reorder, PDF/print, autosave)
-- [ ] Auth (email + Google), return-to redirect
-- [ ] Dashboard, saved, applications, profile, settings
-- [ ] Jobs, freelancing (+ freelancer profile), roadmaps, resources, interview prep
-- [ ] About, contact, privacy, terms
-- [ ] Head metadata, tests, route/interaction checks
+- [x] Design system, nav, footer, homepage, listings UI, auth, saved/applications, roadmaps/resources/interview prep
+- [ ] Stability check (build, routes, console)
+- [ ] Remove demo listings from discovery pages → honest empty states; remove AI hero image
+- [ ] Resume builder: 8 steps, validation, 3 templates, reorder, autosave to account, real PDF
+- [ ] Dashboard (saved, applications + statuses, resume, profile, settings links)
+- [ ] Profile (edit + persist, photo upload), Settings (account, password, sign-out)
+- [ ] Freelancer profile (editable)
+- [ ] About, Contact (honest submission), Privacy, Terms
+- [ ] Tests + user-journey checks, responsive checks, final report

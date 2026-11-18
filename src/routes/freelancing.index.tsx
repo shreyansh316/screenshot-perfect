@@ -16,12 +16,13 @@ function Page() {
   const navigate = Route.useNavigate();
   return (
     <>
-      <PageHeader eyebrow="Freelancing" title="Well-scoped freelance projects" description="Short projects with clear deliverables. Budgets are shown only when the client provides one." />
+      <PageHeader eyebrow="Freelancing" title="Well-scoped freelance projects" description="Short projects with clear deliverables." />
       <ListingExplorer
         items={FREELANCE}
         search={search}
         onChange={(next) => navigate({ search: next, replace: true, resetScroll: false })}
         filters={["category"]}
+        emptyTitle="No freelance projects available right now."
         noun="project"
         searchPlaceholder="Search projects by skill or keyword"
       />

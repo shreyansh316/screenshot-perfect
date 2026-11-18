@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { CompanyMark, DemoBadge } from "./common";
+import { CompanyMark } from "./common";
 import { OpportunityCard, SaveButton } from "./OpportunityCard";
 import { supabase } from "@/integrations/supabase/client";
 import { useApplications } from "@/hooks/use-account";
@@ -137,7 +137,6 @@ export function OpportunityDetail({ o }: { o: Opportunity }) {
                 <div className="flex flex-wrap items-center gap-2">
                   <Badge variant="blue">{typeLabel[o.type]}</Badge>
                   <Badge variant="muted">{o.category}</Badge>
-                  <DemoBadge />
                 </div>
                 <h1 className="mt-2.5 text-2xl font-semibold text-navy md:text-[2rem] md:leading-tight">{o.title}</h1>
                 <p className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
@@ -191,7 +190,7 @@ export function OpportunityDetail({ o }: { o: Opportunity }) {
           </section>
           <div className="flex items-start gap-3 rounded-lg border bg-surface p-4 text-sm text-muted-foreground">
             <ShieldAlert className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden="true" />
-            <p>This is sample content from a fictional organisation, shown so you can explore how Growvia works. Pay amounts and deadlines are not verified. Never pay a fee to apply for any opportunity.</p>
+            <p>Always confirm pay, dates and the employer’s identity before accepting an offer. Never pay a fee to apply for any opportunity.</p>
           </div>
         </div>
 

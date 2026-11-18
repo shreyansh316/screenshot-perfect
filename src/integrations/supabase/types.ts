@@ -80,8 +80,10 @@ export type Database = {
       profiles: {
         Row: {
           availability: string
+          avatar_path: string | null
           bio: string | null
           created_at: string
+          education: string | null
           email_updates: boolean
           experience_summary: string | null
           freelancer_intro: string | null
@@ -99,8 +101,10 @@ export type Database = {
         }
         Insert: {
           availability?: string
+          avatar_path?: string | null
           bio?: string | null
           created_at?: string
+          education?: string | null
           email_updates?: boolean
           experience_summary?: string | null
           freelancer_intro?: string | null
@@ -118,8 +122,10 @@ export type Database = {
         }
         Update: {
           availability?: string
+          avatar_path?: string | null
           bio?: string | null
           created_at?: string
+          education?: string | null
           email_updates?: boolean
           experience_summary?: string | null
           freelancer_intro?: string | null

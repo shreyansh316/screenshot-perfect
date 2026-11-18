@@ -1,18 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
-  ArrowRight, BarChart3, Code2, Compass, FileText, Landmark, Leaf, Megaphone, Microscope, Newspaper, Palette, ShieldCheck, Workflow, Boxes, Lock, BadgeCheck, HandCoins, Check,
+  ArrowRight, BarChart3, Inbox, MessagesSquare, Route as RouteIcon, Bookmark, Code2, Compass, FileText, Landmark, Leaf, Megaphone, Microscope, Newspaper, Palette, ShieldCheck, Workflow, Boxes, Lock, BadgeCheck, HandCoins, Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { HeroSearch } from "@/components/site/SearchBar";
 import { OpportunityCard } from "@/components/site/OpportunityCard";
-import { CompanyMark, DemoBadge, Reveal, SectionHeading } from "@/components/site/common";
+import { CompanyMark, EmptyState, Reveal, SectionHeading } from "@/components/site/common";
 import {
-  ALL_OPPORTUNITIES, CATEGORIES, FREELANCE, INTERNSHIPS, JOBS, arrangementLabel, budgetLabel, locationLabel, postedLabel, type Category,
+  CATEGORIES, FREELANCE, INTERNSHIPS, JOBS, budgetLabel, locationLabel, postedLabel, type Category,
 } from "@/lib/opportunities";
 import { RESOURCES, ROADMAPS } from "@/lib/content";
 import { pageMeta } from "@/lib/seo";
-import heroImg from "@/assets/hero-mentorship.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -58,20 +57,25 @@ function Home() {
               </Button>
             </div>
           </div>
-          <div className="relative hidden lg:block">
-            <img src={heroImg} alt="An intern talking through her work with a mentor at a desk" width={1200} height={1408} className="aspect-[5/5.2] w-full rounded-xl object-cover" />
-            <div className="surface-card absolute -left-10 bottom-10 w-72 p-4 shadow-pop">
-              <div className="flex items-center gap-3">
-                <CompanyMark name={featured[0]!.company.name} className="size-9 text-xs" />
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{featured[0]!.title}</p>
-                  <p className="truncate text-xs text-muted-foreground">{featured[0]!.company.name}</p>
-                </div>
-              </div>
-              <div className="mt-3 flex items-center justify-between">
-                <Badge variant="blue">{arrangementLabel[featured[0]!.arrangement]}</Badge>
-                <DemoBadge />
-              </div>
+          <div className="hidden lg:block">
+            <div className="surface-card p-6 shadow-pop">
+              <p className="text-sm font-semibold text-navy">What you can do on Growvia today</p>
+              <ul className="mt-4 divide-y">
+                {[
+                  { icon: FileText, t: "Build a resume and download it as a PDF", to: "/resume-builder/build" as const },
+                  { icon: RouteIcon, t: "Follow a step-by-step career roadmap", to: "/roadmaps" as const },
+                  { icon: MessagesSquare, t: "Practise common interview questions", to: "/interview-prep" as const },
+                  { icon: Bookmark, t: "Save verified listings as they're published", to: "/explore" as const },
+                ].map((x) => (
+                  <li key={x.t}>
+                    <Link to={x.to} className="group flex items-center gap-3 py-3.5 text-sm">
+                      <span className="grid size-9 shrink-0 place-items-center rounded-md bg-blue-soft text-primary"><x.icon className="size-4" aria-hidden="true" /></span>
+                      <span className="flex-1 group-hover:text-primary">{x.t}</span>
+                      <ArrowRight className="size-4 text-muted-foreground group-hover:text-primary" aria-hidden="true" />
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -91,20 +95,18 @@ function Home() {
       {/* Categories */}
       <section className="container-page py-16 md:py-20">
         <Reveal>
-          <SectionHeading eyebrow="Browse by field" title="Opportunity categories" description="Ten fields, each with internships, early-career jobs and freelance work." />
+          <SectionHeading eyebrow="Browse by field" title="Opportunity categories" description="Ten fields we organise internships, early-career jobs and freelance work into." />
         </Reveal>
         <Reveal delay={80}>
           <ul className="mt-8 grid border-l border-t sm:grid-cols-2 lg:grid-cols-5">
             {CATEGORIES.map((c) => {
               const Icon = categoryIcons[c];
-              const n = ALL_OPPORTUNITIES.filter((o) => o.category === c).length;
               return (
                 <li key={c} className="border-b border-r">
                   <Link to="/explore" search={{ category: [c] }} className="group flex h-full flex-col gap-6 bg-surface p-5 transition-colors hover:bg-blue-soft">
                     <Icon className="size-5 text-teal" aria-hidden="true" />
                     <div>
                       <p className="text-sm font-semibold text-foreground group-hover:text-primary">{c}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{n} opening{n === 1 ? "" : "s"}</p>
                     </div>
                   </Link>
                 </li>
@@ -121,15 +123,19 @@ function Home() {
             <SectionHeading
               eyebrow="Internships"
               title="Featured internships"
-              description="Recently added roles with real responsibilities and a named mentor team."
+              description="Internships appear here once they've been verified."
               action={<Button asChild variant="outline"><Link to="/internships">All internships <ArrowRight /></Link></Button>}
             />
           </Reveal>
-          <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {featured.map((o, i) => (
-              <Reveal key={o.id} delay={i * 50}><OpportunityCard o={o} className="h-full" /></Reveal>
-            ))}
-          </div>
+          {featured.length === 0 ? (
+            <EmptyState className="mt-8" icon={Inbox} title="No verified internships available right now." description="We only publish internships we can verify. Check back soon, or get your resume ready in the meantime." action={<Button asChild variant="outline"><Link to="/resume-builder/build">Build your resume</Link></Button>} />
+          ) : (
+            <div className="mt-8 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {featured.map((o, i) => (
+                <Reveal key={o.id} delay={i * 50}><OpportunityCard o={o} className="h-full" /></Reveal>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 
@@ -137,7 +143,8 @@ function Home() {
       <section className="container-page grid gap-12 py-16 md:py-20 lg:grid-cols-[1.25fr_1fr]">
         <Reveal>
           <SectionHeading eyebrow="Jobs" title="Latest job opportunities" action={<Link to="/jobs" className="text-sm font-medium text-primary hover:underline">View all jobs →</Link>} />
-          <ul className="mt-6 divide-y rounded-lg border bg-surface">
+          {latestJobs.length === 0 && <EmptyState className="mt-6" icon={Inbox} title="No verified jobs available right now." description="New jobs appear here once they've been verified." />}
+          <ul className={latestJobs.length ? "mt-6 divide-y rounded-lg border bg-surface" : "hidden"}>
             {latestJobs.map((o) => (
               <li key={o.id}>
                 <Link to="/jobs/$id" params={{ id: o.id }} className="group flex items-center gap-4 p-4 transition-colors hover:bg-muted/60">
@@ -155,7 +162,8 @@ function Home() {
         </Reveal>
         <Reveal delay={80}>
           <SectionHeading eyebrow="Freelancing" title="Freelance projects" action={<Link to="/freelancing" className="text-sm font-medium text-primary hover:underline">View all →</Link>} />
-          <ul className="mt-6 grid gap-3">
+          {projects.length === 0 && <EmptyState className="mt-6" icon={Inbox} title="No freelance projects available right now." description="Projects appear here once the client has been verified." />}
+          <ul className={projects.length ? "mt-6 grid gap-3" : "hidden"}>
             {projects.map((o) => (
               <li key={o.id}>
                 <Link to="/freelancing/$id" params={{ id: o.id }} className="surface-card card-hover block p-4">
@@ -217,7 +225,7 @@ function Home() {
             No work experience yet? Projects, coursework, volunteering and skills are real resume material. Growvia guides you through eight short steps with a live preview and exports a clean, text-based PDF.
           </p>
           <ul className="mt-6 grid gap-2.5 text-sm">
-            {["Guided steps with examples for students", "Three clean templates, reorderable sections", "Live preview and properly formatted PDF download", "Autosaves to your account when signed in"].map((t) => (
+            {["Eight guided steps that work even without job experience", "Three clean templates, reorderable sections", "Live preview and a text-based PDF download", "Saves to your account when signed in"].map((t) => (
               <li key={t} className="flex items-center gap-2.5"><Check className="size-4 text-teal" aria-hidden="true" />{t}</li>
             ))}
           </ul>
@@ -230,6 +238,7 @@ function Home() {
           <div className="relative mx-auto max-w-md">
             <div className="absolute -right-4 -top-4 h-full w-full rounded-lg border bg-blue-soft" aria-hidden="true" />
             <div className="surface-card relative p-7 shadow-pop" aria-hidden="true">
+              <p className="absolute right-4 top-3 text-[0.625rem] font-medium uppercase tracking-wider text-muted-foreground">Example</p>
               <div className="border-b pb-4 text-center">
                 <p className="text-lg font-semibold text-navy">Aanya Rao</p>
                 <p className="text-xs text-muted-foreground">Computer Science student · Frontend developer</p>
@@ -309,7 +318,7 @@ function Home() {
             </div>
             <ul className="grid gap-6 sm:grid-cols-2">
               {[
-                { icon: ShieldCheck, t: "Honest listings", d: "Sample listings are clearly marked “Demo listing”. We never present unverified roles as verified." },
+                { icon: ShieldCheck, t: "Honest listings", d: "We only publish listings we can verify, and we never invent companies, salaries or deadlines." },
                 { icon: HandCoins, t: "Never pay to apply", d: "Growvia is free for candidates. Legitimate employers don't charge application fees." },
                 { icon: Lock, t: "Your data stays yours", d: "Your resume, saved items and applications are private to your account." },
                 { icon: Leaf, t: "Browse without an account", d: "Search, read details and use the resume builder before you decide to sign up." },

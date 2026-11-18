@@ -22,6 +22,7 @@ function Page() {
         search={search}
         onChange={(next) => navigate({ search: next, replace: true, resetScroll: false })}
         filters={["type", "location", "arrangement", "schedule", "category"]}
+        emptyTitle="No verified opportunities available right now."
         noun="opportunity"
         searchPlaceholder="Search roles, companies or skills"
       />

@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { Info, type LucideIcon } from "lucide-react";
+import { type LucideIcon } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/ui/badge";
 
 export function PageHeader({ eyebrow, title, description, children, className }: { eyebrow?: string; title: string; description?: string; children?: ReactNode; className?: string }) {
   return (
@@ -38,26 +37,6 @@ export function EmptyState({ icon: Icon, title, description, action, className }
       <h3 className="mt-4 text-base font-semibold text-foreground">{title}</h3>
       <p className="mt-1.5 max-w-sm text-sm leading-relaxed text-muted-foreground">{description}</p>
       {action && <div className="mt-5">{action}</div>}
-    </div>
-  );
-}
-
-export function DemoBadge({ className }: { className?: string }) {
-  return (
-    <Badge variant="demo" className={className} title="Sample content from a fictional organisation">
-      Demo listing
-    </Badge>
-  );
-}
-
-export function DemoNotice({ className }: { className?: string }) {
-  return (
-    <div className={cn("flex items-start gap-3 rounded-lg border border-warning/25 bg-warning-soft px-4 py-3 text-sm text-foreground", className)} role="note">
-      <Info className="mt-0.5 size-4 shrink-0 text-warning" aria-hidden="true" />
-      <p>
-        <span className="font-medium">These are demo listings.</span>{" "}
-        <span className="text-muted-foreground">Companies, roles and budgets are fictional samples so you can try search, filters, saving and applying. Nothing is sent to a real employer.</span>
-      </p>
     </div>
   );
 }

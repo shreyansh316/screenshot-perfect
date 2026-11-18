@@ -125,6 +125,20 @@ function Section({ k, d, s }: { k: SectionKey; d: ResumeData; s: S }) {
           ))}
         </section>
       ) : null;
+    case "languages":
+      return d.languages.length ? (
+        <section className={s.section}>
+          {heading}
+          <p className="mt-1.5">{d.languages.map((l) => [l.name, l.level && `(${l.level})`].filter(Boolean).join(" ")).join(", ")}</p>
+        </section>
+      ) : null;
+    case "additional":
+      return d.additional.trim() ? (
+        <section className={s.section}>
+          {heading}
+          <Bullets text={d.additional} />
+        </section>
+      ) : null;
   }
 }
 

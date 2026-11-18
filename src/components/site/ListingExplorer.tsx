@@ -1,12 +1,13 @@
 import { useDeferredValue, useEffect, useMemo, useState, type ReactNode } from "react";
-import { ChevronLeft, ChevronRight, SearchX, SlidersHorizontal, X, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Inbox, SearchX, SlidersHorizontal, X, Search } from "lucide-react";
+import { Link } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { OpportunityCard } from "./OpportunityCard";
-import { DemoNotice, EmptyState } from "./common";
+import { EmptyState } from "./common";
 import {
   CATEGORIES, LOCATIONS, filterOpportunities, paginate, type Arrangement, type Category, type DurationBucket, type Opportunity, type Schedule,
 } from "@/lib/opportunities";
@@ -24,6 +25,8 @@ interface Props {
   filters: FilterKey[];
   noun: string;
   searchPlaceholder: string;
+  /** Shown when there are no verified listings at all. */
+  emptyTitle: string;
 }
 
 function toggle<T>(arr: T[] | undefined, v: T): T[] | undefined {
@@ -140,7 +143,7 @@ function FilterPanel({ items, search, set, filters }: { items: Opportunity[]; se
   );
 }
 
-export function ListingExplorer({ items, search, onChange, filters, noun, searchPlaceholder }: Props) {
+export function ListingExplorer({ items, search, onChange, filters, noun, searchPlaceholder, emptyTitle }: Props) {
   const [q, setQ] = useState(search.q ?? "");
   useEffect(() => setQ(search.q ?? ""), [search.q]);
 
@@ -169,9 +172,26 @@ export function ListingExplorer({ items, search, onChange, filters, noun, search
     if (typeof window !== "undefined") window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
+  if (items.length === 0) {
+    return (
+      <div className="container-page py-10 md:py-14">
+        <EmptyState
+          icon={Inbox}
+          title={emptyTitle}
+          description="We only publish listings we can verify, and none are live yet. Meanwhile, you can build your resume or follow a career roadmap."
+          action={
+            <div className="flex flex-wrap justify-center gap-2">
+              <Button asChild><Link to="/resume-builder/build">Build your resume</Link></Button>
+              <Button asChild variant="outline"><Link to="/roadmaps">Career roadmaps</Link></Button>
+            </div>
+          }
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="container-page py-8 md:py-10">
-      <DemoNotice className="mb-6" />
       <div className="grid gap-8 lg:grid-cols-[260px_1fr]">
         <aside className="hidden lg:block" aria-label="Filters">
           <div className="sticky top-24">
