@@ -105,7 +105,7 @@ function Section({ k, d, t }: { k: SectionKey; d: ResumeData; t: T }) {
         <View style={wrapStyle}>
           <Heading k={k} t={t} />
           {d.experience.map((x, i) => (
-            <View key={x.id} style={i ? item : undefined}>
+            <View key={x.id} style={i ? item : {}}>
               <View style={base.row} wrap={false}>
                 <Text style={base.rowLeft}>
                   <Text style={base.bold}>{x.title}</Text>{x.company ? ` · ${x.company}` : ""}
@@ -126,7 +126,7 @@ function Section({ k, d, t }: { k: SectionKey; d: ResumeData; t: T }) {
         <View style={wrapStyle}>
           <Heading k={k} t={t} />
           {d.education.map((x, i) => (
-            <View key={x.id} style={i ? item : undefined} wrap={false}>
+            <View key={x.id} style={i ? item : {}} wrap={false}>
               <View style={base.row}>
                 <Text style={base.rowLeft}>
                   <Text style={base.bold}>{[x.degree, x.field].filter(Boolean).join(", ") || x.institution}</Text>
@@ -145,7 +145,7 @@ function Section({ k, d, t }: { k: SectionKey; d: ResumeData; t: T }) {
         <View style={wrapStyle}>
           <Heading k={k} t={t} />
           {d.projects.map((x, i) => (
-            <View key={x.id} style={i ? item : undefined} wrap={false}>
+            <View key={x.id} style={i ? item : {}} wrap={false}>
               <View style={base.row}>
                 <Text style={base.rowLeft}>
                   <Text style={base.bold}>{x.name}</Text>
@@ -202,7 +202,7 @@ function Section({ k, d, t }: { k: SectionKey; d: ResumeData; t: T }) {
 export function ResumeDocument({ data, template }: { data: ResumeData; template: TemplateKey }) {
   const t = TEMPLATES[template];
   const p = data.personal;
-  const contact: { text: string; url?: string }[] = [
+  const contact: { text: string; url?: string | undefined }[] = [
     { text: [p.city, p.country].filter(Boolean).join(", ") },
     { text: p.email, url: p.email ? `mailto:${p.email.trim()}` : undefined },
     { text: p.phone },
@@ -211,7 +211,7 @@ export function ResumeDocument({ data, template }: { data: ResumeData; template:
   const align = t.headerAlign === "center" ? "center" : "flex-start";
 
   return (
-    <Document title={`${p.fullName || "Resume"} — Resume`} author={p.fullName || undefined} creator="Growvia Resume Builder" producer="Growvia">
+    <Document title={`${p.fullName || "Resume"} — Resume`} author={p.fullName || "Growvia user"} creator="Growvia Resume Builder" producer="Growvia">
       <Page size="A4" style={{ ...base.page, fontSize: t.fontSize, lineHeight: 1.4, paddingVertical: t.padding[0], paddingHorizontal: t.padding[1] }}>
         <View style={{ alignItems: align, paddingBottom: 8, borderBottomWidth: t.headerRule.width, borderBottomColor: t.headerRule.color }}>
           <Text style={{ ...base.bold, fontSize: t.nameSize, color: NAVY, lineHeight: 1.15 }}>{p.fullName}</Text>
