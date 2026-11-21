@@ -1,0 +1,17 @@
+{
+  "name": "Growvia — From Potential to Opportunity",
+  "short_name": "Growvia",
+  "description": "Discover internships, jobs and freelance projects, build your resume, and plan your career with Growvia.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#142B4A",
+  "theme_color": "#142B4A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

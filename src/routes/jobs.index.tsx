@@ -7,7 +7,12 @@ import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/jobs/")({
   validateSearch: parseOpportunitySearch,
-  head: () => ({ meta: pageMeta("Jobs", "Entry-level and junior jobs for freshers and early-career professionals, filterable by location and arrangement.") }),
+  head: () => ({
+    meta: pageMeta(
+      "Jobs",
+      "Entry-level and junior jobs for freshers and early-career professionals, filterable by location and arrangement.",
+    ),
+  }),
   component: Page,
 });
 
@@ -16,7 +21,11 @@ function Page() {
   const navigate = Route.useNavigate();
   return (
     <>
-      <PageHeader eyebrow="Jobs" title="Early-career jobs, clearly described" description="Roles for freshers and early-career professionals, with the work arrangement and experience level stated up front." />
+      <PageHeader
+        eyebrow="Jobs"
+        title="Early-career jobs, clearly described"
+        description="Roles for freshers and early-career professionals, with the work arrangement and experience level stated up front."
+      />
       <ListingExplorer
         items={JOBS}
         search={search}

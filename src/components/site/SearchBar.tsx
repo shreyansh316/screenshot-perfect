@@ -24,34 +24,53 @@ export function HeroSearch({ className }: { className?: string }) {
   };
 
   const field = "flex items-center gap-2.5 px-4 py-3 md:py-0";
-  const control = "w-full min-w-0 bg-transparent text-[0.9375rem] text-foreground placeholder:text-muted-foreground focus:outline-none";
+  const control =
+    "w-full min-w-0 bg-transparent text-[0.9375rem] text-foreground placeholder:text-muted-foreground focus:outline-none";
 
   return (
     <form
       role="search"
       onSubmit={submit}
-      className={cn("surface-card grid divide-y p-1.5 shadow-pop md:h-16 md:grid-cols-[1.5fr_1fr_1fr_auto] md:divide-x md:divide-y-0", className)}
+      className={cn(
+        "surface-card grid divide-y p-1.5 shadow-pop md:h-16 md:grid-cols-[1.5fr_1fr_1fr_auto] md:divide-x md:divide-y-0",
+        className,
+      )}
     >
       <label className={field}>
         <Search className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         <span className="sr-only">Role, company or skill</span>
-        <input value={q} onChange={(e) => setQ(e.target.value)} placeholder="Role, company or skill" className={control} />
+        <input
+          value={q}
+          onChange={(e) => setQ(e.target.value)}
+          placeholder="Role, company or skill"
+          className={control}
+        />
       </label>
       <label className={field}>
         <MapPin className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         <span className="sr-only">Location</span>
-        <select value={location} onChange={(e) => setLocation(e.target.value)} className={cn(control, "cursor-pointer")}>
+        <select
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className={cn(control, "cursor-pointer")}
+        >
           <option value="">Any location</option>
           <option value="Remote">Remote</option>
           {LOCATIONS.map((l) => (
-            <option key={l} value={l}>{l}</option>
+            <option key={l} value={l}>
+              {l}
+            </option>
           ))}
         </select>
       </label>
       <label className={field}>
         <Layers className="size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
         <span className="sr-only">Opportunity type</span>
-        <select value={type} onChange={(e) => setType(e.target.value as "" | OpportunityType)} className={cn(control, "cursor-pointer")}>
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value as "" | OpportunityType)}
+          className={cn(control, "cursor-pointer")}
+        >
           <option value="">All types</option>
           <option value="internship">Internships</option>
           <option value="job">Jobs</option>

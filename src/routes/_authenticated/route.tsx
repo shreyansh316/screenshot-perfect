@@ -16,7 +16,9 @@ export const Route = createFileRoute("/_authenticated")({
       <div className="h-8 w-64 animate-pulse rounded bg-muted" />
       <div className="mt-4 h-4 w-96 max-w-full animate-pulse rounded bg-muted" />
       <div className="mt-10 grid gap-4 md:grid-cols-3">
-        {[0, 1, 2].map((i) => <div key={i} className="h-36 animate-pulse rounded-lg bg-muted" />)}
+        {[0, 1, 2].map((i) => (
+          <div key={i} className="h-36 animate-pulse rounded-lg bg-muted" />
+        ))}
       </div>
     </div>
   ),

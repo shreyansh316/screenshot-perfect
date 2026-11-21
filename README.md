@@ -1,24 +1,38 @@
-# Screenshot Perfect
+# Growvia
 
-Implement exactly the screenshot and nothing else
+> From Potential to Opportunity.
 
-This project was built with [Lovable](https://lovable.dev).
+Growvia is a modern career platform built for students, graduates, and early-career talent to discover internships, full-time jobs, and freelance gigs, create ATS-ready resumes, and navigate structured career roadmaps.
 
-## Build with Lovable
+## Key Features
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/4cafb331-6c3c-46cf-b424-8853d64d5b5c).
+- **Opportunity Discovery**: Browse and filter through internships, entry-level roles, and freelance contracts with transparent arrangement details (remote, hybrid, on-site, stipends/rates).
+- **Resume Builder**: Step-by-step ATS-friendly resume creator with real-time preview and PDF generation.
+- **Career Roadmaps**: Detailed roadmaps and curated learning resources for modern tech and creative careers.
+- **Application & Bookmark Tracker**: Track and organize applications and saved opportunities from a unified candidate dashboard.
 
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
+## Tech Stack
 
-## Development
+- **Framework**: [TanStack Start](https://tanstack.com/start) (Full-stack SSR with React 19)
+- **Styling**: Tailwind CSS
+- **UI Components**: Radix UI primitives & Lucide Icons
+- **Database & Auth**: Supabase
+- **Build Tool**: Vite & Nitro
 
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
+## Local Development
+
+Prerequisites: Node.js (v18+) and npm.
 
 ```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
+
+# Build for production
+npm run build
+
+# Run unit tests
+npm test
 ```

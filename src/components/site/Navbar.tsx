@@ -1,11 +1,31 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, type LinkProps } from "@tanstack/react-router";
 import {
-  Bookmark, Briefcase, ChevronDown, FileText, GraduationCap, LayoutDashboard, LogOut, Menu, Settings, User, X, Compass, Laptop, ClipboardList, Map, BookOpen,
+  Bookmark,
+  Briefcase,
+  ChevronDown,
+  FileText,
+  GraduationCap,
+  LayoutDashboard,
+  LogOut,
+  Menu,
+  Settings,
+  User,
+  X,
+  Compass,
+  Laptop,
+  ClipboardList,
+  Map,
+  BookOpen,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Logo } from "./Logo";
 import { displayName, useAuth, useSignOut } from "@/lib/auth";
@@ -39,7 +59,15 @@ const accountNav: NavItem[] = [
   { to: "/settings", label: "Settings", icon: Settings },
 ];
 
-function NavLink({ item, onClick, className }: { item: NavItem; onClick?: () => void; className?: string }) {
+function NavLink({
+  item,
+  onClick,
+  className,
+}: {
+  item: NavItem;
+  onClick?: () => void;
+  className?: string;
+}) {
   return (
     <Link
       to={item.to}
@@ -75,7 +103,10 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-40 border-b bg-surface/95 backdrop-blur supports-[backdrop-filter]:bg-surface/85">
-      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground">
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-primary focus:px-3 focus:py-2 focus:text-primary-foreground"
+      >
         Skip to content
       </a>
       <div className="container-page flex h-16 items-center gap-6">
@@ -91,7 +122,10 @@ export function Navbar() {
           ) : user ? (
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <button className="hidden items-center gap-2 rounded-md py-1 pl-1 pr-2 text-sm transition-colors hover:bg-muted sm:flex" aria-label="Account menu">
+                <button
+                  className="hidden items-center gap-2 rounded-md py-1 pl-1 pr-2 text-sm transition-colors hover:bg-muted sm:flex"
+                  aria-label="Account menu"
+                >
                   <span className="grid size-8 place-items-center rounded-full bg-navy text-xs font-semibold uppercase text-navy-foreground">
                     {name.slice(0, 2)}
                   </span>
@@ -123,10 +157,14 @@ export function Navbar() {
           ) : (
             <>
               <Button asChild variant="ghost" className="hidden sm:inline-flex">
-                <Link to="/auth" search={{ mode: "signin" }}>Sign In</Link>
+                <Link to="/auth" search={{ mode: "signin" }}>
+                  Sign In
+                </Link>
               </Button>
               <Button asChild className="hidden sm:inline-flex">
-                <Link to="/auth" search={{ mode: "signup" }}>Get Started</Link>
+                <Link to="/auth" search={{ mode: "signup" }}>
+                  Get Started
+                </Link>
               </Button>
             </>
           )}
@@ -145,19 +183,32 @@ export function Navbar() {
       </div>
 
       {open && (
-        <div id="mobile-nav" className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto border-t bg-surface animate-in fade-in slide-in-from-top-2 duration-200 xl:hidden">
+        <div
+          id="mobile-nav"
+          className="fixed inset-x-0 bottom-0 top-16 z-40 overflow-y-auto border-t bg-surface animate-in fade-in slide-in-from-top-2 duration-200 xl:hidden"
+        >
           <nav aria-label="Mobile" className="container-page grid gap-1 py-4">
             {items.map((i) => (
-              <Link key={i.to} to={i.to} className="flex items-center gap-3 rounded-md px-3 py-3 text-[0.9375rem] hover:bg-muted data-[status=active]:bg-blue-soft data-[status=active]:text-primary">
+              <Link
+                key={i.to}
+                to={i.to}
+                className="flex items-center gap-3 rounded-md px-3 py-3 text-[0.9375rem] hover:bg-muted data-[status=active]:bg-blue-soft data-[status=active]:text-primary"
+              >
                 <i.icon className="size-4 text-muted-foreground" />
                 {i.label}
               </Link>
             ))}
             {user && (
               <>
-                <div className="mt-3 px-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">Your account</div>
+                <div className="mt-3 px-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+                  Your account
+                </div>
                 {accountNav.map((i) => (
-                  <Link key={i.to} to={i.to} className="flex items-center gap-3 rounded-md px-3 py-3 text-[0.9375rem] hover:bg-muted data-[status=active]:bg-blue-soft data-[status=active]:text-primary">
+                  <Link
+                    key={i.to}
+                    to={i.to}
+                    className="flex items-center gap-3 rounded-md px-3 py-3 text-[0.9375rem] hover:bg-muted data-[status=active]:bg-blue-soft data-[status=active]:text-primary"
+                  >
                     <i.icon className="size-4 text-muted-foreground" />
                     {i.label}
                   </Link>
@@ -171,8 +222,16 @@ export function Navbar() {
                 </Button>
               ) : (
                 <>
-                  <Button asChild size="lg"><Link to="/auth" search={{ mode: "signup" }}>Get Started</Link></Button>
-                  <Button asChild size="lg" variant="outline"><Link to="/auth" search={{ mode: "signin" }}>Sign In</Link></Button>
+                  <Button asChild size="lg">
+                    <Link to="/auth" search={{ mode: "signup" }}>
+                      Get Started
+                    </Link>
+                  </Button>
+                  <Button asChild size="lg" variant="outline">
+                    <Link to="/auth" search={{ mode: "signin" }}>
+                      Sign In
+                    </Link>
+                  </Button>
                 </>
               )}
             </div>

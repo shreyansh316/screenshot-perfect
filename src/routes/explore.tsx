@@ -7,7 +7,12 @@ import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/explore")({
   validateSearch: parseOpportunitySearch,
-  head: () => ({ meta: pageMeta("Explore opportunities", "Search every internship, job and freelance project on Growvia in one place.") }),
+  head: () => ({
+    meta: pageMeta(
+      "Explore opportunities",
+      "Search every internship, job and freelance project on Growvia in one place.",
+    ),
+  }),
   component: Page,
 });
 
@@ -16,7 +21,11 @@ function Page() {
   const navigate = Route.useNavigate();
   return (
     <>
-      <PageHeader eyebrow="Explore" title="Every opportunity in one search" description="Internships, jobs and freelance projects together. Narrow by type, location and how you'd like to work." />
+      <PageHeader
+        eyebrow="Explore"
+        title="Every opportunity in one search"
+        description="Internships, jobs and freelance projects together. Narrow by type, location and how you'd like to work."
+      />
       <ListingExplorer
         items={ALL_OPPORTUNITIES}
         search={search}

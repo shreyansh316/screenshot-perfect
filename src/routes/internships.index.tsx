@@ -7,7 +7,12 @@ import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/internships/")({
   validateSearch: parseOpportunitySearch,
-  head: () => ({ meta: pageMeta("Internships", "Search and filter internships by skill, location, work arrangement, pay, schedule and duration.") }),
+  head: () => ({
+    meta: pageMeta(
+      "Internships",
+      "Search and filter internships by skill, location, work arrangement, pay, schedule and duration.",
+    ),
+  }),
   component: Page,
 });
 
@@ -16,7 +21,11 @@ function Page() {
   const navigate = Route.useNavigate();
   return (
     <>
-      <PageHeader eyebrow="Internships" title="Find an internship that teaches you something real" description="Filter by how and where you want to work. Save the ones you like and apply when you're ready." />
+      <PageHeader
+        eyebrow="Internships"
+        title="Find an internship that teaches you something real"
+        description="Filter by how and where you want to work. Save the ones you like and apply when you're ready."
+      />
       <ListingExplorer
         items={INTERNSHIPS}
         search={search}

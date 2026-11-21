@@ -8,7 +8,9 @@ import { supabase } from "@/integrations/supabase/client";
 import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/reset-password")({
-  head: () => ({ meta: pageMeta("Choose a new password", "Set a new password for your Growvia account.") }),
+  head: () => ({
+    meta: pageMeta("Choose a new password", "Set a new password for your Growvia account."),
+  }),
   component: ResetPassword,
 });
 
@@ -51,20 +53,44 @@ function ResetPassword() {
         <h1 className="text-2xl font-semibold text-navy">Choose a new password</h1>
         {!ready ? (
           <p className="mt-3 text-sm text-muted-foreground">
-            Open this page from the reset link in your email. If the link has expired, <Link to="/auth" search={{ mode: "signin" }} className="text-primary underline">request a new one</Link>.
+            Open this page from the reset link in your email. If the link has expired,{" "}
+            <Link to="/auth" search={{ mode: "signin" }} className="text-primary underline">
+              request a new one
+            </Link>
+            .
           </p>
         ) : (
           <form onSubmit={submit} className="mt-6 grid gap-4" noValidate>
             <div className="grid gap-1.5">
               <Label htmlFor="pw">New password</Label>
-              <Input id="pw" type="password" autoComplete="new-password" value={password} onChange={(e) => setPassword(e.target.value)} className="h-11 bg-surface" />
+              <Input
+                id="pw"
+                type="password"
+                autoComplete="new-password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="h-11 bg-surface"
+              />
             </div>
             <div className="grid gap-1.5">
               <Label htmlFor="pw2">Confirm password</Label>
-              <Input id="pw2" type="password" autoComplete="new-password" value={confirm} onChange={(e) => setConfirm(e.target.value)} className="h-11 bg-surface" />
+              <Input
+                id="pw2"
+                type="password"
+                autoComplete="new-password"
+                value={confirm}
+                onChange={(e) => setConfirm(e.target.value)}
+                className="h-11 bg-surface"
+              />
             </div>
-            {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
-            <Button type="submit" size="lg" disabled={busy}>{busy ? "Saving…" : "Update password"}</Button>
+            {error && (
+              <p className="text-sm text-destructive" role="alert">
+                {error}
+              </p>
+            )}
+            <Button type="submit" size="lg" disabled={busy}>
+              {busy ? "Saving…" : "Update password"}
+            </Button>
           </form>
         )}
       </div>

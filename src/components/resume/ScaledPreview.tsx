@@ -29,7 +29,12 @@ export function ScaledPreview({ data, template }: { data: ResumeData; template: 
   return (
     <div ref={box} className="w-full overflow-hidden" style={{ height: height * scale }}>
       <div style={{ transform: `scale(${scale})`, transformOrigin: "top left", width: SHEET_W }}>
-        <ResumeSheet ref={sheet} data={data} template={template} className="rounded-sm border shadow-pop" />
+        <ResumeSheet
+          ref={sheet}
+          data={data}
+          template={template}
+          className="rounded-sm border shadow-pop"
+        />
       </div>
     </div>
   );

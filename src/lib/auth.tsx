@@ -70,7 +70,10 @@ async function runPendingAction(userId: string) {
     if (a.kind === "save") {
       const { error } = await supabase
         .from("saved_opportunities")
-        .upsert({ user_id: userId, opportunity_id: a.id, opportunity_type: a.type }, { onConflict: "user_id,opportunity_id" });
+        .upsert(
+          { user_id: userId, opportunity_id: a.id, opportunity_type: a.type },
+          { onConflict: "user_id,opportunity_id" },
+        );
       if (!error) toast.success(`Saved “${a.title}”`);
       return true;
     }

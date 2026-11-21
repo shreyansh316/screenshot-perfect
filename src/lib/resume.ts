@@ -1,4 +1,12 @@
-export type SectionKey = "summary" | "experience" | "education" | "projects" | "skills" | "certifications" | "languages" | "additional";
+export type SectionKey =
+  | "summary"
+  | "experience"
+  | "education"
+  | "projects"
+  | "skills"
+  | "certifications"
+  | "languages"
+  | "additional";
 export type TemplateKey = "classic" | "modern" | "compact";
 
 export interface Personal {
@@ -12,11 +20,45 @@ export interface Personal {
   linkedin: string;
   github: string;
 }
-export interface Education { id: string; institution: string; degree: string; field: string; start: string; end: string; description: string }
-export interface Experience { id: string; kind: "work" | "internship" | "volunteer"; title: string; company: string; start: string; end: string; current: boolean; responsibilities: string; achievements: string }
-export interface Project { id: string; name: string; description: string; technologies: string; url: string }
-export interface Certification { id: string; name: string; issuer: string; date: string; link: string }
-export interface Language { id: string; name: string; level: string }
+export interface Education {
+  id: string;
+  institution: string;
+  degree: string;
+  field: string;
+  start: string;
+  end: string;
+  description: string;
+}
+export interface Experience {
+  id: string;
+  kind: "work" | "internship" | "volunteer";
+  title: string;
+  company: string;
+  start: string;
+  end: string;
+  current: boolean;
+  responsibilities: string;
+  achievements: string;
+}
+export interface Project {
+  id: string;
+  name: string;
+  description: string;
+  technologies: string;
+  url: string;
+}
+export interface Certification {
+  id: string;
+  name: string;
+  issuer: string;
+  date: string;
+  link: string;
+}
+export interface Language {
+  id: string;
+  name: string;
+  level: string;
+}
 
 export interface ResumeData {
   personal: Personal;
@@ -43,9 +85,24 @@ export const SECTION_LABELS: Record<SectionKey, string> = {
   additional: "Additional information",
 };
 
-export const LANGUAGE_LEVELS = ["Native", "Fluent", "Professional", "Conversational", "Basic"] as const;
+export const LANGUAGE_LEVELS = [
+  "Native",
+  "Fluent",
+  "Professional",
+  "Conversational",
+  "Basic",
+] as const;
 
-export const DEFAULT_ORDER: SectionKey[] = ["summary", "education", "experience", "projects", "skills", "certifications", "languages", "additional"];
+export const DEFAULT_ORDER: SectionKey[] = [
+  "summary",
+  "education",
+  "experience",
+  "projects",
+  "skills",
+  "certifications",
+  "languages",
+  "additional",
+];
 
 export const TEMPLATES: { key: TemplateKey; name: string; note: string }[] = [
   { key: "classic", name: "Classic", note: "Serif-free, centred header, works for any field" },
@@ -59,7 +116,17 @@ export function uid(): string {
 
 export function emptyResume(): ResumeData {
   return {
-    personal: { fullName: "", headline: "", email: "", phone: "", city: "", country: "", portfolio: "", linkedin: "", github: "" },
+    personal: {
+      fullName: "",
+      headline: "",
+      email: "",
+      phone: "",
+      city: "",
+      country: "",
+      portfolio: "",
+      linkedin: "",
+      github: "",
+    },
     summary: "",
     education: [],
     experience: [],
@@ -72,10 +139,40 @@ export function emptyResume(): ResumeData {
   };
 }
 
-export const emptyEducation = (): Education => ({ id: uid(), institution: "", degree: "", field: "", start: "", end: "", description: "" });
-export const emptyExperience = (): Experience => ({ id: uid(), kind: "work", title: "", company: "", start: "", end: "", current: false, responsibilities: "", achievements: "" });
-export const emptyProject = (): Project => ({ id: uid(), name: "", description: "", technologies: "", url: "" });
-export const emptyCertification = (): Certification => ({ id: uid(), name: "", issuer: "", date: "", link: "" });
+export const emptyEducation = (): Education => ({
+  id: uid(),
+  institution: "",
+  degree: "",
+  field: "",
+  start: "",
+  end: "",
+  description: "",
+});
+export const emptyExperience = (): Experience => ({
+  id: uid(),
+  kind: "work",
+  title: "",
+  company: "",
+  start: "",
+  end: "",
+  current: false,
+  responsibilities: "",
+  achievements: "",
+});
+export const emptyProject = (): Project => ({
+  id: uid(),
+  name: "",
+  description: "",
+  technologies: "",
+  url: "",
+});
+export const emptyCertification = (): Certification => ({
+  id: uid(),
+  name: "",
+  issuer: "",
+  date: "",
+  link: "",
+});
 export const emptyLanguage = (): Language => ({ id: uid(), name: "", level: "" });
 
 /** Merge unknown stored JSON into a valid ResumeData (tolerates older/partial drafts). */
@@ -90,15 +187,23 @@ export function normalizeResume(raw: unknown): ResumeData {
   return {
     personal: { ...base.personal, ...(r.personal ?? {}) },
     summary: typeof r.summary === "string" ? r.summary : "",
-    education: Array.isArray(r.education) ? r.education.map((e) => ({ ...emptyEducation(), ...e })) : [],
-    experience: Array.isArray(r.experience) ? r.experience.map((e) => ({ ...emptyExperience(), ...e })) : [],
+    education: Array.isArray(r.education)
+      ? r.education.map((e) => ({ ...emptyEducation(), ...e }))
+      : [],
+    experience: Array.isArray(r.experience)
+      ? r.experience.map((e) => ({ ...emptyExperience(), ...e }))
+      : [],
     projects: Array.isArray(r.projects) ? r.projects.map((e) => ({ ...emptyProject(), ...e })) : [],
     skills: {
       technical: Array.isArray(r.skills?.technical) ? r.skills.technical : [],
       professional: Array.isArray(r.skills?.professional) ? r.skills.professional : [],
     },
-    certifications: Array.isArray(r.certifications) ? r.certifications.map((e) => ({ ...emptyCertification(), ...e })) : [],
-    languages: Array.isArray(r.languages) ? r.languages.map((e) => ({ ...emptyLanguage(), ...e })) : [],
+    certifications: Array.isArray(r.certifications)
+      ? r.certifications.map((e) => ({ ...emptyCertification(), ...e }))
+      : [],
+    languages: Array.isArray(r.languages)
+      ? r.languages.map((e) => ({ ...emptyLanguage(), ...e }))
+      : [],
     additional: typeof r.additional === "string" ? r.additional : "",
     sectionOrder: order,
   };
@@ -149,12 +254,14 @@ export function validateResume(r: ResumeData): Errors {
   const e: Errors = { ...validatePersonal(r.personal) };
   r.education.forEach((ed, i) => {
     if (!ed.institution.trim()) e[`education.${i}.institution`] = "Add the institution name.";
-    if (!isValidRange(ed.start, ed.end)) e[`education.${i}.end`] = "End date is before the start date.";
+    if (!isValidRange(ed.start, ed.end))
+      e[`education.${i}.end`] = "End date is before the start date.";
   });
   r.experience.forEach((ex, i) => {
     if (!ex.title.trim()) e[`experience.${i}.title`] = "Add a role title.";
     if (!ex.company.trim()) e[`experience.${i}.company`] = "Add the organisation.";
-    if (!ex.current && !isValidRange(ex.start, ex.end)) e[`experience.${i}.end`] = "End date is before the start date.";
+    if (!ex.current && !isValidRange(ex.start, ex.end))
+      e[`experience.${i}.end`] = "End date is before the start date.";
   });
   r.projects.forEach((p, i) => {
     if (!p.name.trim()) e[`projects.${i}.name`] = "Add a project name.";
@@ -185,9 +292,16 @@ export type StepKey = (typeof STEPS)[number]["key"];
 
 /** Which step an error key belongs to. */
 export function stepForError(key: string): StepKey {
-  if (["portfolio", "linkedin", "github"].includes(key) || key.startsWith("languages.")) return "additional";
+  if (["portfolio", "linkedin", "github"].includes(key) || key.startsWith("languages."))
+    return "additional";
   const head = key.split(".")[0]!;
-  if (head === "education" || head === "experience" || head === "projects" || head === "certifications") return head;
+  if (
+    head === "education" ||
+    head === "experience" ||
+    head === "projects" ||
+    head === "certifications"
+  )
+    return head;
   return "personal";
 }
 
@@ -227,7 +341,10 @@ export function dateRange(start: string, end: string, current = false): string {
 }
 
 export function displayUrl(u: string): string {
-  return u.trim().replace(/^https?:\/\//i, "").replace(/\/$/, "");
+  return u
+    .trim()
+    .replace(/^https?:\/\//i, "")
+    .replace(/\/$/, "");
 }
 
 export function bulletLines(text: string): string[] {

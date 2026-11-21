@@ -7,7 +7,12 @@ import { pageMeta } from "@/lib/seo";
 
 export const Route = createFileRoute("/freelancing/")({
   validateSearch: parseOpportunitySearch,
-  head: () => ({ meta: pageMeta("Freelance projects", "Short, well-scoped freelance projects in design, development, writing and data.") }),
+  head: () => ({
+    meta: pageMeta(
+      "Freelance projects",
+      "Short, well-scoped freelance projects in design, development, writing and data.",
+    ),
+  }),
   component: Page,
 });
 
@@ -16,7 +21,11 @@ function Page() {
   const navigate = Route.useNavigate();
   return (
     <>
-      <PageHeader eyebrow="Freelancing" title="Well-scoped freelance projects" description="Short projects with clear deliverables." />
+      <PageHeader
+        eyebrow="Freelancing"
+        title="Well-scoped freelance projects"
+        description="Short projects with clear deliverables."
+      />
       <ListingExplorer
         items={FREELANCE}
         search={search}

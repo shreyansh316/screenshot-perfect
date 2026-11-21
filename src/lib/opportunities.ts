@@ -147,14 +147,29 @@ export function filterOpportunities(list: Opportunity[], f: OpportunityFilters):
 export function paginate<T>(items: T[], page: number, perPage: number) {
   const totalPages = Math.max(1, Math.ceil(items.length / perPage));
   const current = Math.min(Math.max(1, page), totalPages);
-  return { items: items.slice((current - 1) * perPage, current * perPage), page: current, totalPages };
+  return {
+    items: items.slice((current - 1) * perPage, current * perPage),
+    page: current,
+    totalPages,
+  };
 }
 
 // ---------- Formatting ----------
 
-export const arrangementLabel: Record<Arrangement, string> = { remote: "Remote", hybrid: "Hybrid", onsite: "On-site" };
-export const scheduleLabel: Record<Schedule, string> = { "full-time": "Full-time", "part-time": "Part-time" };
-export const typeLabel: Record<OpportunityType, string> = { internship: "Internship", job: "Job", freelance: "Freelance" };
+export const arrangementLabel: Record<Arrangement, string> = {
+  remote: "Remote",
+  hybrid: "Hybrid",
+  onsite: "On-site",
+};
+export const scheduleLabel: Record<Schedule, string> = {
+  "full-time": "Full-time",
+  "part-time": "Part-time",
+};
+export const typeLabel: Record<OpportunityType, string> = {
+  internship: "Internship",
+  job: "Job",
+  freelance: "Freelance",
+};
 
 export function postedLabel(days: number): string {
   if (days <= 0) return "Posted today";
@@ -177,7 +192,11 @@ export function paidLabel(paid: boolean | null): string {
 
 export function budgetLabel(b: Budget | null | undefined): string {
   if (!b) return "Budget not provided";
-  const fmt = new Intl.NumberFormat("en", { style: "currency", currency: b.currency, maximumFractionDigits: 0 });
+  const fmt = new Intl.NumberFormat("en", {
+    style: "currency",
+    currency: b.currency,
+    maximumFractionDigits: 0,
+  });
   return `${fmt.format(b.min)}–${fmt.format(b.max)}${b.kind === "hourly" ? " / hour" : " fixed"}`;
 }
 
@@ -186,5 +205,9 @@ export function locationLabel(o: Opportunity): string {
 }
 
 export function detailPath(o: Opportunity): "/internships/$id" | "/jobs/$id" | "/freelancing/$id" {
-  return o.type === "internship" ? "/internships/$id" : o.type === "job" ? "/jobs/$id" : "/freelancing/$id";
+  return o.type === "internship"
+    ? "/internships/$id"
+    : o.type === "job"
+      ? "/jobs/$id"
+      : "/freelancing/$id";
 }

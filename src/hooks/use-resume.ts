@@ -14,7 +14,10 @@ const ANON_KEY = "growvia:resume-draft";
 const backupKey = (uid: string) => `growvia:resume-backup:${uid}`;
 const TEMPLATE_KEYS: TemplateKey[] = ["classic", "modern", "compact"];
 
-interface Stored { data: ResumeData; template: TemplateKey }
+interface Stored {
+  data: ResumeData;
+  template: TemplateKey;
+}
 
 function readLocal(key: string): Stored | null {
   try {
@@ -78,7 +81,11 @@ export function useResume() {
         setStatus(local ? "local" : "idle");
         return;
       }
-      const { data: row, error } = await supabase.from("resumes").select("data, template, updated_at").eq("user_id", userId).maybeSingle();
+      const { data: row, error } = await supabase
+        .from("resumes")
+        .select("data, template, updated_at")
+        .eq("user_id", userId)
+        .maybeSingle();
       if (cancelled) return;
       const backup = readLocal(backupKey(userId));
       const anon = readLocal(ANON_KEY);
@@ -139,7 +146,10 @@ export function useResume() {
     writeLocal(backupKey(userId), v);
     const { error } = await supabase
       .from("resumes")
-      .upsert({ user_id: userId, data: v.data as never, template: v.template }, { onConflict: "user_id" });
+      .upsert(
+        { user_id: userId, data: v.data as never, template: v.template },
+        { onConflict: "user_id" },
+      );
     inFlight.current = false;
     if (error) {
       setStatus("error");
@@ -210,13 +220,24 @@ export function useResume() {
     return () => window.removeEventListener("beforeunload", h);
   }, [status, userId]);
 
-  useEffect(() => () => {
-    if (timer.current) clearTimeout(timer.current);
-  }, []);
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current);
+    },
+    [],
+  );
 
   return {
-    data, template, status, savedAt, signedIn: !!userId,
-    update, setTemplate, saveNow: flush,
-    deviceDraft, useDeviceDraft, dismissDeviceDraft,
+    data,
+    template,
+    status,
+    savedAt,
+    signedIn: !!userId,
+    update,
+    setTemplate,
+    saveNow: flush,
+    deviceDraft,
+    useDeviceDraft,
+    dismissDeviceDraft,
   };
 }

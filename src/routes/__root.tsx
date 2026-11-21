@@ -8,10 +8,9 @@ import {
   Scripts,
   type ErrorComponentProps,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import type { ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "@/components/site/Navbar";
 import { Footer } from "@/components/site/Footer";
 import { Toaster } from "@/components/ui/sonner";
@@ -42,9 +41,6 @@ function NotFoundComponent() {
 function ErrorComponent({ error, reset }: ErrorComponentProps) {
   console.error(error);
   const router = useRouter();
-  useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
-  }, [error]);
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
@@ -86,11 +82,19 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Growvia — From Potential to Opportunity" },
-      { name: "description", content: "Discover internships, jobs and freelance projects, build your resume, and plan your career with Growvia." },
+      {
+        name: "description",
+        content:
+          "Discover internships, jobs and freelance projects, build your resume, and plan your career with Growvia.",
+      },
       { name: "author", content: "Growvia" },
       { name: "theme-color", content: "#142B4A" },
       { property: "og:title", content: "Growvia — From Potential to Opportunity" },
-      { property: "og:description", content: "Discover internships, jobs and freelance projects, build your resume, and plan your career with Growvia." },
+      {
+        property: "og:description",
+        content:
+          "Discover internships, jobs and freelance projects, build your resume, and plan your career with Growvia.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -100,6 +104,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: appCss,
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "manifest", href: "/manifest.json" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {

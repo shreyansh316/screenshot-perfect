@@ -1,5 +1,12 @@
 import {
-  CATEGORIES, type Arrangement, type Category, type DurationBucket, type OpportunityType, type PaidFilter, type Schedule, type SortKey,
+  CATEGORIES,
+  type Arrangement,
+  type Category,
+  type DurationBucket,
+  type OpportunityType,
+  type PaidFilter,
+  type Schedule,
+  type SortKey,
 } from "./opportunities";
 
 export interface OpportunitySearch {
@@ -21,7 +28,9 @@ function str(v: unknown): string | undefined {
 }
 function list<T extends string>(v: unknown, allowed: readonly T[]): T[] | undefined {
   const arr = Array.isArray(v) ? v : typeof v === "string" ? v.split(",") : [];
-  const out = arr.filter((x): x is T => typeof x === "string" && (allowed as readonly string[]).includes(x));
+  const out = arr.filter(
+    (x): x is T => typeof x === "string" && (allowed as readonly string[]).includes(x),
+  );
   return out.length ? Array.from(new Set(out)) : undefined;
 }
 function one<T extends string>(v: unknown, allowed: readonly T[]): T | undefined {
