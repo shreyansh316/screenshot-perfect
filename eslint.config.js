@@ -14,6 +14,8 @@ export default tseslint.config(
       "src/generated/**",
       "src/routeTree.gen.ts",
       "src/integrations/supabase/**",
+      "src/lib/roadmaps-catalogue.ts",
+      "scripts/**",
     ],
   },
   {
